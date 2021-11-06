@@ -22,6 +22,17 @@ which docker
 echo $PATH
 ```
 
+## Specifics
+
+On my system:
+
+```
+which ffmpeg
+/opt/homebrew/bin/ffmpeg
+```
+
+My path definitely contains an entry for `/opt/homebrew/bin`.
+
 ## Prerequisites
 
 Install `docker` and `ffmpeg` with [Homebrew](https://brew.sh/), as here:
