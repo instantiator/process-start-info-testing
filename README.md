@@ -14,7 +14,11 @@ Some quick experiments with `ProcessStartInfo` with `UseShellExecute == false` g
 
 ![Results showing that docker can be found on the PATH, but ffmpeg cannot.](images/test-run-results.png)
 
-In these examples, both appear on the `PATH`, as can be shown with:
+Test `CanFind_ffmpeg_WithoutShellExecute` fails by throwing this `Win32Exception`:
+
+> Test method `ProcessStartInfoTesting.UseShellExecuteTests.CanFind_ffmpeg_WithoutShellExecute` threw exception: `System.ComponentModel.Win32Exception: No such file or directory`
+
+In these examples, both binaries appear on the `PATH`, as can be shown with:
 
 ```bash
 which ffmpeg
