@@ -12,7 +12,7 @@ Some quick experiments with `ProcessStartInfo` with `UseShellExecute == false` g
 * Some binaries, like `docker`, can be found and executed.
 * Others, like `ffmpeg`, cannot.
 
-![images/test-run-results.png](Results showing that docker can be found on the PATH, but ffmpeg cannot.)
+![Results showing that docker can be found on the PATH, but ffmpeg cannot.](images/test-run-results.png)
 
 In these examples, both appear on the `PATH`, as can be shown with:
 
