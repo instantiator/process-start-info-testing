@@ -7,10 +7,12 @@ states that:
 > executable, or a simple executable name that the system will attempt to find within folders specified
 > by the `PATH` environment variable.
 
-Some quick experiments with `ProcessStartInfo` with `UseShellExecute == false` give conflicting results:
+Some quick experiments with `ProcessStartInfo` with `UseShellExecute == false` give conflicting results on Mac OS, Big Sur:
 
 * Some binaries, like `docker`, can be found and executed.
 * Others, like `ffmpeg`, cannot.
+
+![images/test-run-results.png](Results showing that docker can be found on the PATH, but ffmpeg cannot.)
 
 In these examples, both appear on the `PATH`, as can be shown with:
 
