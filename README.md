@@ -21,9 +21,9 @@ Test `CanFind_ffmpeg_WithoutShellExecute` fails by throwing this `Win32Exception
 
 > Test method `ProcessStartInfoTesting.UseShellExecuteTests.CanFind_ffmpeg_WithoutShellExecute` threw exception: `System.ComponentModel.Win32Exception: No such file or directory`
 
-## Results from command line tool
+## Results from the CLI
 
-Running the tests with the CLI succeeds:
+Running the tests using the donet CLI succeeds:
 
 ```bash
 dotnet test
