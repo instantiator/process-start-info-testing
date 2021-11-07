@@ -21,15 +21,9 @@ Test `CanFind_ffmpeg_WithoutShellExecute` fails by throwing this `Win32Exception
 
 > Test method `ProcessStartInfoTesting.UseShellExecuteTests.CanFind_ffmpeg_WithoutShellExecute` threw exception: `System.ComponentModel.Win32Exception: No such file or directory`
 
-In these examples, both binaries appear on the `PATH`, as can be shown with:
-
-```bash
-which ffmpeg
-which docker
-echo $PATH
-```
-
 ## Results from command line tool
+
+Running the tests with the CLI succeeds:
 
 ```bash
 dotnet test
