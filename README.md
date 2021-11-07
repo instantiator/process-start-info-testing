@@ -9,8 +9,11 @@ states that:
 
 Some quick experiments with `ProcessStartInfo` with `UseShellExecute == false` give conflicting results on Mac OS, Big Sur:
 
-* Some binaries, like `docker`, can be found and executed.
-* Others, like `ffmpeg`, cannot.
+* Some binaries, like `docker`, can be reliably found and executed.
+* Others, like `ffmpeg`, cannot _when launched from Visual Studio._
+* When the tests are launched using command line `dotnet` tool, they can be found and executed, too.
+
+## Results from Visual Studio
 
 ![Results showing that docker can be found on the PATH, but ffmpeg cannot.](images/test-run-results.png)
 
@@ -26,16 +29,32 @@ which docker
 echo $PATH
 ```
 
+## Results from command line tool
+
+```bash
+dotnet test
+Passed!  - Failed:     0, Passed:     5, Skipped:     0, Total:     5, Duration: 882 ms
+```
+
 ## Specifics
 
-On my system:
+On my system, both `docker` and `ffmpeg` are provided on the `PATH` as links:
 
 ```
-which ffmpeg
+$ which ffmpeg
 /opt/homebrew/bin/ffmpeg
+
+$ ls -lh /opt/homebrew/bin/ffmpeg
+lrwxr-xr-x  1 lewiswestbury  admin    35B Nov  1 13:49 /opt/homebrew/bin/ffmpeg -> ../Cellar/ffmpeg/4.4.1_2/bin/ffmpeg
+
+$ which docker                   
+/usr/local/bin/docker
+
+$ ls -lh /usr/local/bin/docker
+lrwxr-xr-x  1 lewiswestbury  wheel    54B Mar  9  2021 /usr/local/bin/docker -> /Applications/Docker.app/Contents/Resources/bin/docker
 ```
 
-My path definitely contains an entry for `/opt/homebrew/bin`.
+My path definitely contains entries for `/opt/homebrew/bin` and `/usr/local/bin`.
 
 ## Prerequisites
 
