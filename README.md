@@ -1,5 +1,9 @@
 # ProcessStartInfoTesting
 
+**NB. This is solved: Mac GUI applications do not have access to the user's default shell `PATH`.** See below for a work-around to launch apps (eg. Visual Studio) from the shell so that have visibility of the `PATH`.
+
+This solutions is for testing an issue that occurs on OS X when attempting to launch a process with `UseShellExecute` set to `false`. Some binaries (like `docker`) are reliably located and launched. Others (in this example, `ffmpeg`) cannot be found _when launched from Visual Studio._
+
 Documentation for [UseShellExecute](https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.processstartinfo.useshellexecute?view=net-5.0)
 states that:
 
@@ -7,7 +11,7 @@ states that:
 > executable, or a simple executable name that the system will attempt to find within folders specified
 > by the `PATH` environment variable.
 
-Some quick experiments with `ProcessStartInfo` with `UseShellExecute == false` give conflicting results on Mac OS, Big Sur:
+Some quick experiments with `ProcessStartInfo` with `UseShellExecute` set to `false` give conflicting results on Mac OS:
 
 * Some binaries, like `docker`, can be reliably found and executed.
 * Others, like `ffmpeg`, cannot _when launched from Visual Studio._
@@ -57,4 +61,24 @@ Install `docker` and `ffmpeg` with [Homebrew](https://brew.sh/), as here:
 ```bash
 brew install ffmpeg
 brew install --cask docker
+```
+
+# The solution
+
+In the end, the answer should have been obvious from the start, as described in [this thread](https://developercommunity.visualstudio.com/t/Xamarin-Visual-Studio-for-Mac-override/374888#T-ND376446):
+
+> Mac GUI applications do not inherit environment variables defined in your shell profile.
+
+Visual Studio didn't know about my `PATH` and nor did the tests it launched.
+
+However, when launching the tests from the shell, using the `dotnet` CLI, they worked perfectly - as the process could now find `ffmpeg` in the `PATH`:
+
+```shell
+dotnet test
+```
+
+It is also possible to launch Visual Studio from the terminal, using the `open` command - so giving it visibility of your shell's `PATH`:
+
+```shell
+open -n /Applications/Visual\ Studio.app
 ```
